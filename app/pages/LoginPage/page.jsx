@@ -1,7 +1,19 @@
-import React from 'react'
+"use client"
 
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 
 const LoginPage = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // For now, we'll redirect without validation
+    // You can add authentication logic here later
+    router.push('/pages/Dashboard')
+  }
   return (
     <div>
       <header className="text-xl bg-white text-black font-bold flex justify-between items-center p-4 mx-4 my-4 rounded-xl shadow-xl">
@@ -27,7 +39,7 @@ const LoginPage = () => {
             <h2 className="text-xl font-semibold text-gray-600">Please Login to Continue</h2>
           </div>
           
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email
@@ -35,8 +47,11 @@ const LoginPage = () => {
               <input
                 type="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter your email"
+                required
               />
             </div>
             
@@ -47,8 +62,11 @@ const LoginPage = () => {
               <input
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter your password"
+                required
               />
             </div>
             
